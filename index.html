@@ -64,11 +64,12 @@
   <script type="text/javascript">
     updateTable = (csv) => {
       const rows = csv.split("\n")
-      let tab = document.getElementById("my-tbody")
+      let tab = document.getElementById("my-tbody"), found = 0
 
       for (const r in rows) {
         const cols = rows[r].split(",")
         if (cols.length === 6) {
+          found += 1
           let tr = tab.insertRow(-1)
           for (const c in cols) {
             const l = cols[c].split(";")
@@ -88,7 +89,7 @@
       td.colSpan = 6
       td.classList.add('text-muted')
       td.classList.add('p-3')
-      td.innerHTML = '<span id="todo" class="lead">' + (100-rows.length) + ' to go ...</span>'
+      td.innerHTML = '<span id="todo" class="lead">' + (100-found) + ' to go ...</span>'
 
     }
 
