@@ -47,8 +47,8 @@
               </button>
             </li>
             <li class="nav-item ms-2">
-              <button type="button" class="btn btn-sm btn-outline-dark btn-flag" onclick="toggle('ru')">
-                <img id="ru" class="btn-flag-img" src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/ru.svg" alt="russian" />
+              <button type="button" class="btn btn-sm btn-outline-dark btn-flag" onclick="toggle('ua')">
+                <img id="ua" class="btn-flag-img" src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/ua.svg" alt="ukranian" />
               </button>
             </li>
             <li class="nav-item ms-2">
@@ -82,9 +82,9 @@
             <img class="img-fluid border my-flag shadow-sm" src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/de.svg"
               alt="German" title="German" />
           </th>
-          <th class="my-col ru">
-            <img class="img-fluid border my-flag shadow-sm" src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/ru.svg"
-              alt="Russian" title="Russian" />
+          <th class="my-col ua">
+            <img class="img-fluid border my-flag shadow-sm" src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/ua.svg"
+              alt="Ukranian" title="Ukranian" />
           </th>
           <th class="my-col jp">
             <img class="img-fluid border my-flag shadow-sm" src="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/flags/4x3/jp.svg"
@@ -109,7 +109,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
   <script type="text/javascript">
-    let LANGS = { pt: true, en: true, es: true, de: true, ru: true, jp: true }
+    let LANGS = { pt: true, en: true, es: true, de: true, ua: true, jp: true }
 
     updateTable = (csv) => {
       const rows = csv.split("\n")
@@ -140,6 +140,15 @@
       td.classList.add('text-muted')
       td.classList.add('p-3')
       td.innerHTML = '<span id="todo" class="lead">' + (100-found) + ' to go ...</span>'
+
+      const l = window.location.search.replace('?', '').split('=')
+      if (l[0] === 'langs') {
+        const langs = l[1].split(',')
+        Object.keys(LANGS).forEach(x => {
+          if (!(langs.includes(x.toLowerCase())))
+            toggle(x)
+        })
+      }
 
     }
 
